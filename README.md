@@ -153,6 +153,7 @@ Follow these steps.
 
 ## 关于SVN的配置
 你本地的安装路径\ExcelMerge.GUI.exe diff -s %mine -d %base -c WinMerge -i -w -v -e empty -k
+
 ![](https://github.com/assassinLX/ExcelMerge/test.png)
 
 ## LICENSE
