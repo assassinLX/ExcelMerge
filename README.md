@@ -152,7 +152,7 @@ Follow these steps.
 3. Select "Extract diff with this row as header"
 
 ## 关于SVN的配置
-你本地的安装路径\ExcelMerge.GUI.exe diff -s %mine -d %base -c WinMerge -i -w -v -e empty -k
+你本地的安装路径\ExcelMerge.GUI.exe diff -s %base -d %mine -c WinMerge -i -w -v -e empty -k
 
 ![](https://github.com/assassinLX/ExcelMerge/blob/media/media/test.png)
 
