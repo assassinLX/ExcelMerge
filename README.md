@@ -1,14 +1,14 @@
-- [English](https://github.com/skanmera/ExcelMerge/blob/master/README.md)
-- [日本語](https://github.com/skanmera/ExcelMerge/blob/master/README.jp.md)
+- [English](https://github.com/assassinLX/ExcelMerge/blob/master/README.md)
+- [日本語](https://github.com/assassinLX/ExcelMerge/blob/master/README.jp.md)
 
 
-![](https://github.com/skanmera/ExcelMerge/blob/media/media/logo.png)
+![](https://github.com/assassinLX/ExcelMerge/blob/media/media/logo.png)
 
 ### GUI Diff Tool for Excel
 
-![Demo](https://github.com/skanmera/ExcelMerge/blob/media/media/demo.gif)
+![Demo](https://github.com/assassinLX/ExcelMerge/blob/media/media/demo.gif)
 
-![](https://github.com/skanmera/ExcelMerge/blob/media/media/cell_diff.png)
+![](https://github.com/assassinLX/ExcelMerge/blob/media/media/cell_diff.png)
 
 ## Description
 
@@ -29,17 +29,17 @@ It can also be used as a diff tool for Git or Mercurial.
 
 ## Installation
 
-Download ExcelMergeSetup.msi from [here](https://github.com/skanmera/ExcelMerge/releases/) and Run.
+Download ExcelMergeSetup.msi from [here](https://github.com/assassinLX/ExcelMerge/releases/) and Run.
 
 ## Usage
 
 ### From shortcut
 
-![](https://github.com/skanmera/ExcelMerge/blob/media/media/shortcut.png)
+![](https://github.com/assassinLX/ExcelMerge/blob/media/media/shortcut.png)
 
 ### From exproler context menu
 
-![](https://github.com/skanmera/ExcelMerge/blob/media/media/context.png)
+![](https://github.com/assassinLX/ExcelMerge/blob/media/media/context.png)
 
 ### From command line
 
@@ -87,7 +87,7 @@ vdiff = excelmerge
 ## Register External Command
 Register the external command specified by the command line argument --external-cmd.
 
-![](https://github.com/skanmera/ExcelMerge/blob/media/media/ext_cmd_win.png)
+![](https://github.com/assassinLX/ExcelMerge/blob/media/media/ext_cmd_win.png)
 
 ### Available Variables
 |Value|Description|
@@ -98,19 +98,19 @@ Register the external command specified by the command line argument --external-
   
 Can also be executed from within the tool.
 
-![](https://github.com/skanmera/ExcelMerge/blob/media/media/ext_cmd.png)
+![](https://github.com/assassinLX/ExcelMerge/blob/media/media/ext_cmd.png)
 
 ## File Settings
 
 For each file you can specify a line header or a column header.
 
-![](https://github.com/skanmera/ExcelMerge/blob/media/media/file_settings.png)
+![](https://github.com/assassinLX/ExcelMerge/blob/media/media/file_settings.png)
 
 ## Color Settings
 
 You can customize background colors.
 
-![](https://github.com/skanmera/ExcelMerge/blob/media/media/settings.png)
+![](https://github.com/assassinLX/ExcelMerge/blob/media/media/settings.png)
 
 
 ## Shortcut Keys
@@ -139,7 +139,7 @@ You can customize background colors.
 By selecting Ctrl + D or "Output log" from the context menu, you can output the change as a log.
 The format can be changed from "differential extraction setting".
 
-![](https://github.com/skanmera/ExcelMerge/blob/media/media/log.png)
+![](https://github.com/assassinLX/ExcelMerge/blob/media/media/log.png)
 
 
 ## Known problems
