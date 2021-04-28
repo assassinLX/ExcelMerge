@@ -17,6 +17,7 @@ using ExcelMerge.GUI.ViewModels;
 using ExcelMerge.GUI.Settings;
 using ExcelMerge.GUI.Models;
 using ExcelMerge.GUI.Styles;
+using System.Threading;
 
 namespace ExcelMerge.GUI.Views
 {
@@ -430,6 +431,13 @@ namespace ExcelMerge.GUI.Views
             return diff;
         }
 
+        private ExcelSheetDiff ExecuteDiff2(ExcelSheet srcSheet, ExcelSheet dstSheet)
+        {
+            ExcelSheetDiff diff = null;
+            diff = ExcelSheet.Diff(srcSheet, dstSheet, diffConfig);
+            return diff;
+        }
+
         private void ExecuteDiff(bool isStartup = false)
         {
             if (!File.Exists(SrcPathTextBox.Text) || !File.Exists(DstPathTextBox.Text))
@@ -448,8 +456,12 @@ namespace ExcelMerge.GUI.Views
 
             SrcSheetCombobox.SelectedIndex = diffConfig.SrcSheetIndex;
             DstSheetCombobox.SelectedIndex = diffConfig.DstSheetIndex;
+            
+            var diff_model = GetViewModel();
+            var SrcExcel = ExcelWorkbook.GetSheetNames(diff_model.SrcPath).ToList();
+            
 
-            var srcSheet = srcWorkbook.Sheets[SrcSheetCombobox.SelectedItem.ToString()];
+            var srcSheet = srcWorkbook.Sheets[SrcExcel[SrcSheetCombobox.SelectedIndex]];
             var dstSheet = dstWorkbook.Sheets[DstSheetCombobox.SelectedItem.ToString()];
 
             if (srcSheet.Rows.Count > 10000 || dstSheet.Rows.Count > 10000)
@@ -480,6 +492,45 @@ namespace ExcelMerge.GUI.Views
 
             if (App.Instance.Setting.FocusFirstDiff)
                 MoveNextModifiedCell();
+
+            Dictionary<string, object> models = new Dictionary<string, object>();
+            models.Add("diff_model", diff_model);
+            models.Add("workbooks", workbooks);
+            
+
+            Thread thread = new Thread(new ParameterizedThreadStart(HandleRedPoint));
+            thread.Start(models);
+            //HandleRedPoint();
+        }
+
+        private void HandleRedPoint(object models)
+        {
+            //var diff_model = GetViewModel();
+            var dis_models = models as Dictionary<string, object>;
+            var diff_model = dis_models["diff_model"] as DiffViewModel;
+            var workbooks = dis_models["workbooks"] as Tuple<ExcelWorkbook, ExcelWorkbook>;
+            var SrcExcel = ExcelWorkbook.GetSheetNames(diff_model.SrcPath).ToList();
+            //var workbooks = ReadWorkbooks();
+            var srcWorkbook = workbooks.Item1;
+            var dstWorkbook = workbooks.Item2;
+            List<int> list_cout = new List<int>();
+            for (int i = 0; i < srcWorkbook.Sheets.Count; i++)
+            {
+                var srcSheet2 = srcWorkbook.Sheets[SrcExcel[i]];
+                var dstSheet2 = dstWorkbook.Sheets[SrcExcel[i]];
+                var diff2 = ExecuteDiff2(srcSheet2, dstSheet2);
+                var summary2 = diff2.CreateSummary();
+                list_cout.Add(summary2.AddedRowCount + summary2.ModifiedCellCount + summary2.ModifiedRowCount + summary2.RemovedRowCount);
+            }
+
+            diff_model.SrcSheetNames.Clear();
+            for (int i = 0; i < srcWorkbook.Sheets.Count; i++)
+            {
+                var num = list_cout[i];
+                var excel = SrcExcel[i];
+                var redPoint = excel + "....." + num.ToString();
+                diff_model.SrcSheetNames.Add(redPoint);
+            }
         }
 
         private FileSetting FindFilseSetting(string fileName, int sheetIndex, string sheetName, bool isStartup)
